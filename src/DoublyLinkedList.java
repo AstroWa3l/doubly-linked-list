@@ -28,11 +28,11 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
          * Constructor to create singleton Node
          */
         private Node(T element) {
-            Node current;
-            current = new Node(element);
-            current.data = element;
-            current.prev = current;
-            current.next = current;
+            Node node;
+            node = new Node(element);
+            node.data = element;
+            node.prev = node;
+            node.next = node;
 
         }
 
@@ -44,10 +44,10 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
          * @param prevNode predecessor Node, can be null
          */
         private Node(T element, Node nextNode, Node prevNode) {
-            Node current = new Node(element);
-            current.data = element;
-            current.next = nextNode;
-            current.prev = prevNode;
+            Node node = new Node(element);
+            node.data = element;
+            node.next = nextNode;
+            node.prev = prevNode;
         }
 
         /**
@@ -109,9 +109,22 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
          * Update previous and next nodes
          */
         public void remove() {
-            this.prev = this.prev.prev;
-            this.next = this.next.next;
-            this.data = null;
+
+            if(this.next != null){
+                this.next.prev = this.prev;
+            }
+
+            if(this.prev != null){
+                this.prev.next = this.next;
+            }
+
+            if(this == head){
+                head = this.next;
+            }
+
+            if(this == tail){
+                tail = this.prev;
+            }
         }
     }
 
@@ -119,7 +132,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
      * Creates a new, empty doubly-linked list.
      */
     public DoublyLinkedList() {
-        //TODO: complete default constructor
+
+
     }
 
     /**
